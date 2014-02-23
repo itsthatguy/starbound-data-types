@@ -46,11 +46,3 @@ describe 'StarString', ->
     value = starString.create()
     value.should.equal "StarString::create"
 
-describe 'StarString', ->
-  testOpts =
-    initialNumber: 601000
-
-  it 'should encrypt the expected VLQ value', ->
-    vlq = new VLQ()
-    value = vlq.create(testOpts.initialNumber)
-    value.should.equal "a4d728"
