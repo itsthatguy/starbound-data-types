@@ -2,6 +2,7 @@ require './utils/varHelpers.coffee'
 BitwiseTests = require './utils/bitwiseTests.coffee'
 
 class VLQ extends BitwiseTests
+
   parse: (buffer) ->
     value = 0
     for byte, i in buffer
@@ -38,9 +39,30 @@ class SignedVLQ extends BitwiseTests
   create: -> "SignedVLQ::create"
 
 
-class StarString extends BitwiseTests
-  parse: -> "StarString::parse"
-  create: -> "StarString::create"
+class StarString extends BitwiseTests 
+  stringLength: (buffer) ->
+    return buffer[0]
+  
+  parse: (buffer) ->
+    stringLength = @stringLength(buffer)
+    offset = 1
+    #buffer.toString([encoding], [start], [stringLength])
+    buffer.toString("utf8", offset, stringLength + offset)
+
+
+  
+  create: (string)->
+    buffer = new Buffer(string)
+    vlq = new VLQ()
+    length = new Buffer(vlq.create(buffer.length), "hex")
+    buffer = Buffer.concat([length, buffer])
+    return buffer
+
+  burrito: (value) ->
+    return value
+
+  myMethod: (value) ->
+    return value.length
 
 
 class Variant extends BitwiseTests
