@@ -1,11 +1,9 @@
 libDir = "../lib"
 
-{
-  VLQ,
+{ VLQ,
   SignedVLQ,
   StarString,
-  Variant
-} = require("#{libDir}/dataTypes.coffee")
+  Variant } = require("#{libDir}/dataTypes.coffee")
 
 describe 'VLQ', ->
   testOpts =
