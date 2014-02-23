@@ -8,5 +8,5 @@ describe 'DataTypes', ->
 
   it 'VLQ should encrypt the expected VLQ value', ->
     vlq = new VLQ()
-    value = vlq.createVLQ(testOpts.initialNumber)
+    value = vlq.create(testOpts.initialNumber)
     value.should.equal "a4d728"
