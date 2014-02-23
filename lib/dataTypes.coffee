@@ -1,8 +1,6 @@
 require './utils/varHelpers.coffee'
 BitwiseTests = require './utils/bitwiseTests.coffee'
 
-ord = (value) -> return value.charCodeAt(0)
-
 class VLQ extends BitwiseTests
   parse: (buffer) ->
     value = 0
