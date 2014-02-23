@@ -39,16 +39,26 @@ describe 'SignedVLQ', ->
 
 describe 'StarString', ->
   testOpts =
+    parseHex: "0f636f6e6e6563742074696d656f7574"
+    stringText: "connect timeout"
 
-  it 'should return StarString::parse', ->
+  it '::stringLength() should return the first byte as 15', ->
     starString = new StarString()
-    value = starString.parse()
-    value.should.equal "StarString::parse"
+    buffer = new Buffer(testOpts.parseHex, "hex")
+    value = starString.stringLength(buffer)
+    value.should.equal 15
 
-  it 'should return StarString::create', ->
+  it '::parse() should return the string "connect timeout"', ->
     starString = new StarString()
-    value = starString.create()
-    value.should.equal "StarString::create"
+    buffer = new Buffer(testOpts.parseHex, "hex")
+    value = starString.parse(buffer)
+    value.should.equal testOpts.stringText
+
+  it '::create() should return the parseHex', ->
+    starString = new StarString()
+    value = starString.create(testOpts.stringText)
+    value = value.toString("hex")
+    value.should.equal testOpts.parseHex
 
 
 describe 'Variant', ->
