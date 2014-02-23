@@ -26,5 +26,5 @@ npm install
 npm test
 ```
 
-## Party!
+### Party!
 ![](http://media.giphy.com/media/umyu04vCvYI9i/giphy.gif)
