@@ -7,6 +7,7 @@
   "directories": {
     "test": "test"
   },
+  "main": "./index",
   "dependencies": {
     "coffee-script": "^1.7.1",
     "mocha": "^1.17.1",
