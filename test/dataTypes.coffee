@@ -13,12 +13,12 @@ describe 'VLQ', ->
     encodedBinary: "101001001101011100101000"
     encodedHex: "a4d728"
 
-  it 'should encrypt the expected VLQ value', ->
+  it 'should create a VLQ that returns correct Hexadecimal', ->
     vlq = new VLQ()
     value = vlq.create(testOpts.initialNumber)
     value.should.equal testOpts.encodedHex
 
-  it 'should return the expected Decimal value', ->
+  it 'should parse a VLQ that returns correct Decimal', ->
     vlq = new VLQ()
     buffer = new Buffer(testOpts.encodedHex, "hex")
     value = vlq.parse(buffer)
