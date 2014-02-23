@@ -7,8 +7,8 @@ class VLQ extends BitwiseTests
     value = 0
     for byte, i in buffer
       value = (value << 7) | (byte & 0x7f)
-      if byte & 0x80 == 0
-        break
+      break if (byte & 0x80) == 0
+
     return value
 
   create: (n) ->
