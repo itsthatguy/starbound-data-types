@@ -39,18 +39,17 @@ class SignedVLQ extends BitwiseTests
   create: -> "SignedVLQ::create"
 
 
-class StarString extends BitwiseTests 
+class StarString extends BitwiseTests
   stringLength: (buffer) ->
-    return buffer[0]
-  
+    vlq = new VLQ()
+    length = vlq.parse(buffer)
+    return length
+
   parse: (buffer) ->
     stringLength = @stringLength(buffer)
     offset = 1
-    #buffer.toString([encoding], [start], [stringLength])
     buffer.toString("utf8", offset, stringLength + offset)
 
-
-  
   create: (string)->
     buffer = new Buffer(string)
     vlq = new VLQ()
