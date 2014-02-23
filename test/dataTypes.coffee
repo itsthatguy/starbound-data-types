@@ -24,7 +24,7 @@ describe 'VLQ', ->
 
 
 describe 'SignedVLQ', ->
-  testOpts = 
+  testOpts =
 
   it 'should return SignedVLQ::parse', ->
     svlq = new SignedVLQ()
@@ -39,14 +39,8 @@ describe 'SignedVLQ', ->
 
 describe 'StarString', ->
   testOpts =
-    array: [1,1]
     parseHex: "0f636f6e6e6563742074696d656f7574"
     stringText: "connect timeout"
-
-  it '::myMethod() should return 2 when given an array with a length of 2', ->
-    starString = new StarString()
-    value = starString.myMethod(testOpts.array)
-    value.should.equal 2
 
   it '::stringLength() should return the first byte as 15', ->
     starString = new StarString()
@@ -66,13 +60,9 @@ describe 'StarString', ->
     value = value.toString("hex")
     value.should.equal testOpts.parseHex
 
-  it '::burrito() should return poop', ->
-    starString = new StarString()
-    foo = starString.burrito("poop")
-    foo.should.equal "poop"
 
 describe 'Variant', ->
-  testOpts = 
+  testOpts =
 
   it 'should return Variant::parse', ->
     variant = new Variant()

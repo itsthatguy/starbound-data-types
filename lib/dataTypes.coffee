@@ -57,11 +57,6 @@ class StarString extends BitwiseTests
     buffer = Buffer.concat([length, buffer])
     return buffer
 
-  burrito: (value) ->
-    return value
-
-  myMethod: (value) ->
-    return value.length
 
 
 class Variant extends BitwiseTests
