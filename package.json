@@ -1,7 +1,7 @@
 {
-  "name": "bitwise-tests",
-  "version": "0.0.1",
-  "description": "Seeing the binary and hexadecimal output of bitwise operations is super helpful. Here are some simple functions for doing just that.",
+  "name": "starbound-data-types",
+  "version": "0.0.2",
+  "description": "The starbound server and client communicate using many custom data types at a binary level. This repository is an adventure in implementing those data types.",
   "author": "Kevin Altman @itg",
   "license": "ISC",
   "directories": {
