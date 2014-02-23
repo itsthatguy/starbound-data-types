@@ -10,16 +10,19 @@ libDir = "../lib"
 describe 'VLQ', ->
   testOpts =
     initialNumber: 601000
+    encodedBinary: "101001001101011100101000"
+    encodedHex: "a4d728"
 
   it 'should encrypt the expected VLQ value', ->
     vlq = new VLQ()
     value = vlq.create(testOpts.initialNumber)
-    value.should.equal "a4d728"
+    value.should.equal testOpts.encodedHex
 
-  it 'should return VLQ::parse', ->
+  it 'should return the expected Decimal value', ->
     vlq = new VLQ()
-    value = vlq.parse()
-    value.should.equal "VLQ::parse"
+    buffer = new Buffer(testOpts.encodedHex, "hex")
+    value = vlq.parse(buffer)
+    value.should.equal testOpts.initialNumber
 
 
 describe 'SignedVLQ', ->

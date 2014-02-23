@@ -1,8 +1,17 @@
 require './utils/varHelpers.coffee'
 BitwiseTests = require './utils/bitwiseTests.coffee'
 
+ord = (value) -> return value.charCodeAt(0)
+
 class VLQ extends BitwiseTests
-  parse: -> "VLQ::parse"
+  parse: (buffer) ->
+    value = 0
+    for byte, i in buffer
+      value = (value << 7) | (byte & 0x7f)
+      if byte & 0x80 == 0
+        break
+    return value
+
   create: (n) ->
     result = []
 
