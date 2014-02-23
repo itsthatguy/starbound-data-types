@@ -1,6 +1,11 @@
 libDir = "../lib"
 
-{VLQ, SignedVLQ, StarString} = require("#{libDir}/dataTypes.coffee")
+{
+  VLQ,
+  SignedVLQ,
+  StarString,
+  Variant
+} = require("#{libDir}/dataTypes.coffee")
 
 describe 'VLQ', ->
   testOpts =
@@ -19,7 +24,6 @@ describe 'VLQ', ->
 
 describe 'SignedVLQ', ->
   testOpts =
-    initialNumber: 601000
 
   it 'should return SignedVLQ::parse', ->
     svlq = new SignedVLQ()
@@ -34,7 +38,6 @@ describe 'SignedVLQ', ->
 
 describe 'StarString', ->
   testOpts =
-    initialNumber: 601000
 
   it 'should return StarString::parse', ->
     starString = new StarString()
@@ -46,3 +49,16 @@ describe 'StarString', ->
     value = starString.create()
     value.should.equal "StarString::create"
 
+
+describe 'Variant', ->
+  testOpts =
+
+  it 'should return Variant::parse', ->
+    variant = new Variant()
+    value = variant.parse()
+    value.should.equal "Variant::parse"
+
+  it 'should return Variant::create', ->
+    variant = new Variant()
+    value = variant.create()
+    value.should.equal "Variant::create"

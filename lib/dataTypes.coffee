@@ -2,9 +2,7 @@ require './utils/varHelpers.coffee'
 BitwiseTests = require './utils/bitwiseTests.coffee'
 
 class VLQ extends BitwiseTests
-
   parse: -> "VLQ::parse"
-
   create: (n) ->
     result = []
 
@@ -29,19 +27,22 @@ class VLQ extends BitwiseTests
     return @arrayToHexadecimal(result)
 
 class SignedVLQ extends BitwiseTests
-
   parse: -> "SignedVLQ::parse"
-
   create: -> "SignedVLQ::create"
 
+
 class StarString extends BitwiseTests
-
   parse: -> "StarString::parse"
-
   create: -> "StarString::create"
+
+
+class Variant extends BitwiseTests
+  parse: -> "Variant::parse"
+  create: -> "Variant::create"
 
 root = module.exports ? this
 
 root.VLQ = VLQ
 root.SignedVLQ = SignedVLQ
 root.StarString = StarString
+root.Variant = Variant
