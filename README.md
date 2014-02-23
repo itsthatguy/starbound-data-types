@@ -4,6 +4,7 @@
 
 The starbound server and client communicate using many custom data types at a binary level. This repository is an adventure in implementing those data types.
 
+Reference: http://starbound-dev.org/networking/data-types.html
 
 ## Setup
 
@@ -25,5 +26,5 @@ npm install
 npm test
 ```
 
-## Celebrate!
-![](http://media1.giphy.com/media/YTbZzCkRQCEJa/giphy.gif)
+## Party!
+![](http://media.giphy.com/media/umyu04vCvYI9i/giphy.gif)

@@ -7,7 +7,6 @@ class DataTypes extends BitwiseTests
 
   parseVLQ: (buffer) ->
 
-
   createVLQ: (n) ->
     result = []
 
