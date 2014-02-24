@@ -1,75 +1,133 @@
+expect = require("chai").expect
+
 libDir = "../lib"
 
 { VLQ,
   SignedVLQ,
   StarString,
-  Variant } = require("#{libDir}/dataTypes.coffee")
+  Variant,
+  Uint8,
+  Uint8Array,
+  Bool } = require("#{libDir}/dataTypes.coffee")
 
-describe 'VLQ', ->
+describe "VLQ", ->
   testOpts =
     initialNumber: 601000
     encodedBinary: "101001001101011100101000"
     encodedHex: "a4d728"
 
-  it 'should create a VLQ that returns correct Hexadecimal', ->
+  it "::create(#{testOpts.initialNumber}) should return #{testOpts.encodedHex}", ->
     vlq = new VLQ()
     value = vlq.create(testOpts.initialNumber)
     value.should.equal testOpts.encodedHex
 
-  it 'should parse a VLQ that returns correct Decimal', ->
+  it "::parse(#{testOpts.encodedHex}) should return #{testOpts.initialNumber}", ->
     vlq = new VLQ()
     buffer = new Buffer(testOpts.encodedHex, "hex")
     value = vlq.parse(buffer)
     value.should.equal testOpts.initialNumber
 
 
-describe 'SignedVLQ', ->
+describe "SignedVLQ", ->
   testOpts =
+    initialNumber: 601000
+    encodedHex: "c9ae50"
 
-  it 'should return SignedVLQ::parse', ->
+  it "::create() should return SignedVLQ::create", ->
     svlq = new SignedVLQ()
-    value = svlq.parse()
-    value.should.equal "SignedVLQ::parse"
+    value = svlq.create(testOpts.initialNumber)
+    value.should.equal testOpts.encodedHex
 
-  it 'should return SignedVLQ::create', ->
+  it "::parse() should return SignedVLQ::parse", ->
     svlq = new SignedVLQ()
-    value = svlq.create()
-    value.should.equal "SignedVLQ::create"
+    buffer = new Buffer(testOpts.encodedHex, "hex")
+    value = svlq.parse(buffer)
+    value.should.equal testOpts.initialNumber
 
 
-describe 'StarString', ->
+describe "StarString", ->
   testOpts =
     parseHex: "0f636f6e6e6563742074696d656f7574"
     stringText: "connect timeout"
 
-  it '::stringLength() should return the first byte as 15', ->
+  it "::stringLength() should return the first byte as 15", ->
     starString = new StarString()
     buffer = new Buffer(testOpts.parseHex, "hex")
     value = starString.stringLength(buffer)
     value.should.equal 15
 
-  it '::parse() should return the string "connect timeout"', ->
-    starString = new StarString()
-    buffer = new Buffer(testOpts.parseHex, "hex")
-    value = starString.parse(buffer)
-    value.should.equal testOpts.stringText
-
-  it '::create() should return the parseHex', ->
+  it "::create() should return the parseHex", ->
     starString = new StarString()
     value = starString.create(testOpts.stringText)
     value = value.toString("hex")
     value.should.equal testOpts.parseHex
 
+  it "::parse(#{testOpts.parseHex}) should return the string '#{testOpts.stringText}'", ->
+    starString = new StarString()
+    buffer = new Buffer(testOpts.parseHex, "hex")
+    value = starString.parse(buffer)
+    value.should.equal testOpts.stringText
 
-describe 'Variant', ->
+
+
+describe "Variant", ->
   testOpts =
 
-  it 'should return Variant::parse', ->
-    variant = new Variant()
-    value = variant.parse()
-    value.should.equal "Variant::parse"
-
-  it 'should return Variant::create', ->
+  it "::create() should return 0", ->
     variant = new Variant()
     value = variant.create()
-    value.should.equal "Variant::create"
+    value.should.equal 0
+
+  it "::parse() should return 0", ->
+    variant = new Variant()
+    value = variant.parse()
+    value.should.equal 0
+
+
+
+describe "Uint8", ->
+  testOpts =
+    decimal: 3
+    hex: "03"
+
+  it "::create(#{testOpts.decimal}) should return #{testOpts.hex}", ->
+    uint8 = new Uint8()
+    value = uint8.create(testOpts.decimal)
+    value.should.equal testOpts.hex
+
+  it "::parse(#{testOpts.hex}) should return #{testOpts.decimal}", ->
+    uint8 = new Uint8()
+    value = uint8.parse(new Buffer(testOpts.hex, "hex"))
+    value.should.equal testOpts.decimal
+
+describe "Uint8Array", ->
+  testOpts =
+    decimal: [63, 7, 114]
+    hex: "3f0772"
+
+  it "::create(#{testOpts.decimal}) should return [#{testOpts.hex}]", ->
+    uint8Array = new Uint8Array()
+    value = uint8Array.create(testOpts.decimal)
+    value.should.equal testOpts.hex
+
+  it "::parse(#{testOpts.hex}) should return [#{testOpts.decimal}]", ->
+    uint8Array = new Uint8Array()
+    value = uint8Array.parse(new Buffer(testOpts.hex, "hex"))
+    expect(value).is.an('array')
+      .that.deep.equals testOpts.decimal
+
+describe "Bool", ->
+  testOpts =
+    boolean: 0
+    hex: "00"
+
+  it "::create(#{testOpts.boolean}) should return #{testOpts.hex}", ->
+    variant = new Bool()
+    value = variant.create(testOpts.boolean)
+    value.should.equal testOpts.hex
+
+  it "::parse(#{testOpts.hex}) should return #{testOpts.boolean}", ->
+    variant = new Bool()
+    value = variant.parse(new Buffer(testOpts.hex, "hex"))
+    value.should.equal testOpts.boolean
+
