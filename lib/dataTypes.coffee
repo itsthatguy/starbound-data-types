@@ -54,7 +54,7 @@ class StarString extends BitwiseTests
     buffer = new Buffer(string)
     vlq = new VLQ()
     length = new Buffer(vlq.create(buffer.length), "hex")
-    buffer = Buffer.concat([length, buffer])
+    buffer = Buffer.concat([length, buffer]).toString("hex")
     return buffer
 
 
