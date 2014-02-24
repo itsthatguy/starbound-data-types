@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/itsthatguy/bitwise-tests.git"
+    "url": "https://github.com/itsthatguy/starbound-data-types.git"
   },
   "keywords": [
     "bitwise",
@@ -29,10 +29,10 @@
     "mocha"
   ],
   "bugs": {
-    "url": "https://github.com/itsthatguy/bitwise-tests/issues"
+    "url": "https://github.com/itsthatguy/starbound-data-types/issues"
   },
   "engines": {
     "node": ">= 0.2.0"
   },
-  "homepage": "https://github.com/itsthatguy/bitwise-tests"
+  "homepage": "https://github.com/itsthatguy/starbound-data-types"
 }
