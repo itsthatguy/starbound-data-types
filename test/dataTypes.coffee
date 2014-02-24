@@ -23,7 +23,7 @@ describe "VLQ", ->
 
   it "::parse(#{testOpts.encodedHex}) should return #{testOpts.initialNumber}", ->
     vlq = new VLQ()
-    buffer = new Buffer(testOpts.encodedHex, "hex")
+    buffer = testOpts.encodedHex
     value = vlq.parse(buffer)
     value.should.equal testOpts.initialNumber
 
@@ -40,7 +40,7 @@ describe "SignedVLQ", ->
 
   it "::parse() should return SignedVLQ::parse", ->
     svlq = new SignedVLQ()
-    buffer = new Buffer(testOpts.encodedHex, "hex")
+    buffer = testOpts.encodedHex
     value = svlq.parse(buffer)
     value.should.equal testOpts.initialNumber
 
@@ -52,7 +52,7 @@ describe "StarString", ->
 
   it "::stringLength() should return the first byte as 15", ->
     starString = new StarString()
-    buffer = new Buffer(testOpts.parseHex, "hex")
+    buffer = testOpts.parseHex
     value = starString.stringLength(buffer)
     value.should.equal 15
 
@@ -64,7 +64,7 @@ describe "StarString", ->
 
   it "::parse(#{testOpts.parseHex}) should return the string '#{testOpts.stringText}'", ->
     starString = new StarString()
-    buffer = new Buffer(testOpts.parseHex, "hex")
+    buffer = testOpts.parseHex
     value = starString.parse(buffer)
     value.should.equal testOpts.stringText
 
@@ -97,7 +97,7 @@ describe "Uint8", ->
 
   it "::parse(#{testOpts.hex}) should return #{testOpts.decimal}", ->
     uint8 = new Uint8()
-    value = uint8.parse(new Buffer(testOpts.hex, "hex"))
+    value = uint8.parse(testOpts.hex)
     value.should.equal testOpts.decimal
 
 describe "Uint8Array", ->
@@ -112,7 +112,7 @@ describe "Uint8Array", ->
 
   it "::parse(#{testOpts.hex}) should return [#{testOpts.decimal}]", ->
     uint8Array = new Uint8Array()
-    value = uint8Array.parse(new Buffer(testOpts.hex, "hex"))
+    value = uint8Array.parse(testOpts.hex)
     expect(value).is.an('array')
       .that.deep.equals testOpts.decimal
 
@@ -128,6 +128,6 @@ describe "Bool", ->
 
   it "::parse(#{testOpts.hex}) should return #{testOpts.boolean}", ->
     variant = new Bool()
-    value = variant.parse(new Buffer(testOpts.hex, "hex"))
+    value = variant.parse(testOpts.hex)
     value.should.equal testOpts.boolean
 

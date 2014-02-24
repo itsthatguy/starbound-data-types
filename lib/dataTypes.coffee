@@ -27,7 +27,7 @@ class VLQ extends BitwiseTests
     return @arrayToHexadecimal(result)
 
   parse: (buffer) ->
-    buffer = new Buffer(buffer) unless Buffer.isBuffer(buffer)
+    buffer = new Buffer(buffer, "hex") unless Buffer.isBuffer(buffer)
     value = 0
     for byte, i in buffer
       value = (value << 7) | (byte & 0x7f)
@@ -47,7 +47,7 @@ class SignedVLQ extends BitwiseTests
       throw("Error building SignedVLQ")
 
   parse: (buffer) ->
-    buffer = new Buffer(buffer) unless Buffer.isBuffer(buffer)
+    buffer = new Buffer(buffer, "hex") unless Buffer.isBuffer(buffer)
     value = new VLQ().parse(buffer)
     if (value & 1) == 0x00
       return value >> 1
@@ -57,7 +57,7 @@ class SignedVLQ extends BitwiseTests
 
 class StarString extends BitwiseTests
   stringLength: (buffer) ->
-    buffer = new Buffer(buffer) unless Buffer.isBuffer(buffer)
+    buffer = new Buffer(buffer, "hex") unless Buffer.isBuffer(buffer)
     vlq = new VLQ()
     length = vlq.parse(buffer)
     return length
@@ -70,7 +70,7 @@ class StarString extends BitwiseTests
     return buffer
 
   parse: (buffer) ->
-    buffer = new Buffer(buffer) unless Buffer.isBuffer(buffer)
+    buffer = new Buffer(buffer, "hex") unless Buffer.isBuffer(buffer)
     stringLength = @stringLength(buffer)
     offset = 1
     buffer.toString("utf8", offset, stringLength + offset)
@@ -88,14 +88,14 @@ class Uint8 extends BitwiseTests
     buffer = buffer.toString("hex")
     return buffer
   parse: (buffer) ->
-    buffer = new Buffer(buffer) unless Buffer.isBuffer(buffer)
+    buffer = new Buffer(buffer, "hex") unless Buffer.isBuffer(buffer)
     value = buffer.readUInt8(0)
     return value
 
 class Uint8Array extends BitwiseTests
   create: (n) -> return @arrayToHexadecimal(n)
   parse: (buffer) ->
-    buffer = new Buffer(buffer) unless Buffer.isBuffer(buffer)
+    buffer = new Buffer(buffer, "hex") unless Buffer.isBuffer(buffer)
     array = []
     for byte, i in buffer
       array[i] = buffer.readUInt8(i)
@@ -104,7 +104,7 @@ class Uint8Array extends BitwiseTests
 class Bool extends BitwiseTests
   create: (n) -> return new Uint8().create(n)
   parse: (buffer) ->
-    buffer = new Buffer(buffer) unless Buffer.isBuffer(buffer)
+    buffer = new Buffer(buffer, "hex") unless Buffer.isBuffer(buffer)
     return new Uint8().parse(buffer)
 
 root = module.exports ? this
