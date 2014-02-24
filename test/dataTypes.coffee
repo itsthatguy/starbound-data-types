@@ -33,12 +33,12 @@ describe "SignedVLQ", ->
     initialNumber: 601000
     encodedHex: "c9ae50"
 
-  it "::create() should return SignedVLQ::create", ->
+  it "::create(#{testOpts.initialNumber}) should return #{testOpts.encodedHex}", ->
     svlq = new SignedVLQ()
     value = svlq.create(testOpts.initialNumber)
     value.should.equal testOpts.encodedHex
 
-  it "::parse() should return SignedVLQ::parse", ->
+  it "::parse(#{testOpts.encodedHex}) should return #{testOpts.initialNumber}", ->
     svlq = new SignedVLQ()
     buffer = testOpts.encodedHex
     value = svlq.parse(buffer)
@@ -47,16 +47,11 @@ describe "SignedVLQ", ->
 
 describe "StarString", ->
   testOpts =
-    parseHex: "0f636f6e6e6563742074696d656f7574"
-    stringText: "connect timeout"
+    parseHex: "067a6f6d626965"
+    stringText: "zombie"
 
-  it "::stringLength() should return the first byte as 15", ->
-    starString = new StarString()
-    buffer = testOpts.parseHex
-    value = starString.stringLength(buffer)
-    value.should.equal 15
 
-  it "::create() should return the parseHex", ->
+  it "::create(#{testOpts.stringText}) should return '#{testOpts.parseHex}'", ->
     starString = new StarString()
     value = starString.create(testOpts.stringText)
     value = value.toString("hex")
@@ -100,12 +95,13 @@ describe "Uint8", ->
     value = uint8.parse(testOpts.hex)
     value.should.equal testOpts.decimal
 
+
 describe "Uint8Array", ->
   testOpts =
     decimal: [63, 7, 114]
     hex: "3f0772"
 
-  it "::create(#{testOpts.decimal}) should return [#{testOpts.hex}]", ->
+  it "::create([#{testOpts.decimal}]) should return #{testOpts.hex}", ->
     uint8Array = new Uint8Array()
     value = uint8Array.create(testOpts.decimal)
     value.should.equal testOpts.hex
@@ -115,6 +111,7 @@ describe "Uint8Array", ->
     value = uint8Array.parse(testOpts.hex)
     expect(value).is.an('array')
       .that.deep.equals testOpts.decimal
+
 
 describe "Bool", ->
   testOpts =
