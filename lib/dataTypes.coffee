@@ -50,7 +50,7 @@ class StarString extends BitwiseTests
     offset = 1
     buffer.toString("utf8", offset, stringLength + offset)
 
-  create: (string)->
+  create: (string) ->
     buffer = new Buffer(string)
     vlq = new VLQ()
     length = new Buffer(vlq.create(buffer.length), "hex")
