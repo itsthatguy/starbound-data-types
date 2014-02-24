@@ -1,6 +1,6 @@
 {
   "name": "starbound-data-types",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The starbound server and client communicate using many custom data types at a binary level. This repository is an adventure in implementing those data types.",
   "author": "Kevin Altman @itg",
   "license": "ISC",
